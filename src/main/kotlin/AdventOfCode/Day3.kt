@@ -35,11 +35,9 @@ object Day3 {
         val arrayLength = forest.size
 
         var treeCount = 0
-        var j = 0
-        for(i in 0 until arrayLength step stepDown) {
-            val charAt = forest[i][(j*stepRight)%arrayWidth]
+        for((i, j) in (0 until arrayLength step stepDown).withIndex()) {
+            val charAt = forest[j][(i*stepRight)%arrayWidth]
             if(charAt == '#') treeCount++
-            j++
         }
         return treeCount
     }
