@@ -7,6 +7,8 @@ fun main(args: Array<String>) {
     //Day2.countValidPasswords2()
     //Day3.calculateSlope()
     //Day4.countValidPasswords()
-    Day5.countSeatIds()
-    Day5.findSeat()
+    //Day5.countSeatIds()
+    //Day5.findSeat()
+    Day6.countAnswers()
+
 }
