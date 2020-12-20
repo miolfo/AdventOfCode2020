@@ -9,6 +9,6 @@ fun main(args: Array<String>) {
     //Day4.countValidPasswords()
     //Day5.countSeatIds()
     //Day5.findSeat()
-    Day6.countAnswers()
-
+    //Day6.countAnswers()
+    Day7.countValidLuggages()
 }
