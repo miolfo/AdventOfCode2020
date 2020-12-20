@@ -25,16 +25,50 @@ object Day7 {
         return BagRule(color.orEmpty(), containingBags)
     }
 
+    fun countBagsInsideShinyGoldBags(rules: List<BagRule>) : Int {
+        val shinyGoldRule : BagRule = findRuleForColor("shiny gold", rules)!!
+        return countBagsInsideBag(shinyGoldRule, rules, 0)
+    }
+
+    fun countBagsInsideBag(rule: BagRule, allRules: List<BagRule>, accumulator: Int) : Int {
+        if(rule.containedBags.size == 0) {
+            return 0
+        } else {
+            var contains = 0
+            rule.containedBags.forEach {
+                contains += it.count
+                val containingRule = findRuleForColor(it.color, allRules)!!
+                contains += countBagsInsideBag(containingRule, allRules, accumulator) * it.count
+            }
+            return accumulator + contains
+        }
+    }
+
+    fun countShinyGoldBagsInRules(rules: List<BagRule>) : Int = rules.filter { canContainShinyGoldBag(it, rules) }.count()
+
+    fun canContainShinyGoldBag(rule: BagRule?, allRules: List<BagRule>) : Boolean {
+        if(rule == null) return false
+        val canInclude = rule.containedBags.find { it.color == "shiny gold" } != null
+        if(canInclude) {
+            return true
+        } else if(rule.containedBags.size == 0) {
+            return false
+        } else {
+            return rule.containedBags.find { canContainShinyGoldBag(findRuleForColor(it.color, allRules), allRules) } != null
+        }
+    }
+
+    fun findRuleForColor(color: String, rules: List<BagRule> ) : BagRule? = rules.find { it.color == color }
+
     fun countValidLuggages() {
         val file = File("src/main/resources/day7.txt")
-        val count = file.readLines().map { stringToBagRule(it) }.filter {
-            //TODO: Also need to check if each of the containing bags can contain the shiny gold bag!! 
-            var found = false
-            it.containedBags.forEach {
-                if(it.color == "shiny gold") found = true
-            }
-            found
-        }.forEach { println(it) }
+        val count = countShinyGoldBagsInRules(file.readLines().map { stringToBagRule(it) })
         println("Shiny gold can go into $count bags")
+    }
+
+    fun countContainingLuggages() {
+        val file = File("src/main/resources/day7.txt")
+        val count = countBagsInsideShinyGoldBags(file.readLines().map { stringToBagRule(it) })
+        println("Shiny gold contains $count bags")
     }
 }
