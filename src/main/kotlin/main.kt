@@ -10,6 +10,8 @@ fun main(args: Array<String>) {
     //Day5.countSeatIds()
     //Day5.findSeat()
     //Day6.countAnswers()
-    Day7.countValidLuggages()
-    Day7.countContainingLuggages()
+    //Day7.countValidLuggages()
+    //Day7.countContainingLuggages()
+    Day8.calculateAccumulator()
+    Day8.fixCodeAndFindValue()
 }
