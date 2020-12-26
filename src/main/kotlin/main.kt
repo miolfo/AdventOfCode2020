@@ -12,6 +12,7 @@ fun main(args: Array<String>) {
     //Day6.countAnswers()
     //Day7.countValidLuggages()
     //Day7.countContainingLuggages()
-    Day8.calculateAccumulator()
-    Day8.fixCodeAndFindValue()
+    //Day8.calculateAccumulator()
+    //Day8.fixCodeAndFindValue()
+    Day9.findFirstNonMatching()
 }
